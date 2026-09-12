@@ -58,6 +58,8 @@ img{max-width:100%; display:block;}
 .app{
   display:grid;
   grid-template-columns:220px 1fr;
+  max-width:1560px;
+  margin:0 auto;
 }
 
 .sidenav{
@@ -108,6 +110,7 @@ img{max-width:100%; display:block;}
 .sidenav .foot a{color:var(--blue);}
 
 .mobile-topbar{display:none;}
+.mobile-menu{display:none;}
 
 main{min-width:0;}
 
@@ -116,7 +119,7 @@ section{
   border-bottom:1px solid var(--border);
 }
 section:last-of-type{border-bottom:none;}
-section > .wrap{max-width:900px; margin:0;}
+section > .wrap{max-width:980px; margin:0 auto;}
 
 .eyebrow-num{
   color:var(--blue);
@@ -148,7 +151,8 @@ h2.title{
   overflow:hidden;
 }
 .hero .wrap{
-  max-width:none;
+  max-width:1180px;
+  margin:0 auto;
   display:grid;
   grid-template-columns:1.15fr 0.85fr;
   gap:40px;
@@ -429,25 +433,49 @@ h2.title{
   gap:16px;
 }
 @media (max-width:700px){.proj-grid{grid-template-columns:1fr;}}
+
 .pcard{
   border:1px solid var(--border);
   border-radius:var(--radius);
   padding:20px 22px;
   background:var(--surface);
+  transition:border-color .15s, transform .15s, background .15s;
 }
 .pcard h3{font-size:1rem; margin-bottom:6px;}
-.pcard p{color:var(--text-dim); font-size:0.88rem; margin-bottom:12px;}
-.pcard .links{display:flex; gap:14px; flex-wrap:wrap;}
-.pcard .links a{color:var(--blue); font-size:0.84rem;}
+.pcard p{color:var(--text-dim); font-size:0.88rem; margin-bottom:0;}
 .pcard .kicker{font-size:0.74rem; color:var(--text-dim); letter-spacing:0.02em; margin-bottom:8px;}
 
+/* whole-card clickable link */
+a.pcard{
+  display:block;
+  cursor:pointer;
+  position:relative;
+}
+a.pcard:hover{border-color:var(--blue); background:var(--blue-dim); transform:translateY(-2px);}
+a.pcard::after{
+  content:'↗';
+  position:absolute;
+  top:20px; right:20px;
+  color:var(--blue);
+  font-size:0.95rem;
+  opacity:0;
+  transition:opacity .15s;
+}
+a.pcard:hover::after{opacity:1;}
+
+/* cards with several external destinations keep a small link row */
+.pcard .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:12px;}
+.pcard .links a{color:var(--blue); font-size:0.84rem;}
+
 /* ---------- Recommendation ---------- */
+.reco-grid{display:grid; gap:20px;}
 .reco-card{
   border-radius:var(--radius);
   border:1px solid var(--border);
   background:var(--surface);
   padding:28px 30px;
 }
+.reco-card.empty{border-style:dashed;}
 .reco-head{display:flex; align-items:center; gap:16px; margin-bottom:18px;}
 .reco-avatar{
   width:56px; height:56px;
@@ -465,6 +493,7 @@ h2.title{
 .reco-role a{color:var(--blue);}
 .reco-body p{color:var(--text-dim); font-size:0.95rem; margin-bottom:12px;}
 .reco-body p:last-child{margin-bottom:0;}
+.reco-body p.placeholder{font-style:italic; color:var(--text-dim); opacity:0.7;}
 
 /* ---------- Contact ---------- */
 .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
@@ -482,7 +511,7 @@ h2.title{
 
 footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem;}
 
-/* ---------- Mobile ---------- */
+/* ---------- Mobile (kept minimal, PC is the primary target) ---------- */
 @media (max-width:920px){
   .app{grid-template-columns:1fr;}
   .sidenav{display:none;}
@@ -513,6 +542,27 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
   section > .wrap{padding:0 24px;}
   .wrap{padding:0 24px;}
   section{padding:64px 0;}
+}
+
+.reco-avatar-link{
+  display:block;
+  width:56px; height:56px;
+  border-radius:50%;
+  flex-shrink:0;
+  position:relative;
+}
+.reco-avatar-link img{
+  width:100%; height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  border:2px solid var(--border);
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.reco-avatar-link:hover img{
+  border-color:var(--blue);
+  transform:scale(1.06);
+  box-shadow:0 0 0 4px var(--blue-dim);
 }
 </style>
 </head>
@@ -563,7 +613,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
       <div class="wrap">
         <div>
           <div class="hero-kicker">Portfolio : Épreuve E5, session 2027</div>
-          <h1>Je code <em>l'interaction</em>, je dessine <em>le mouvement</em>.</h1>
+          <h1>Ce que j'ai <em>développé</em>, <em>testé</em> et <em>comparé</em> pendant mon BTS SIO SLAM.</h1>
           <p class="hero-sub">Anselme Bartolucci-Caro, alias <strong style="color:var(--text)">Toshysna</strong> : étudiant en BTS SIO SLAM au lycée Gaston Berger (Lille). Deux ans à faire dialoguer le développement logiciel et la création visuelle, du rendu 3D bas niveau à l'animation interactive.</p>
           <div class="hero-cta">
             <a href="#competences-realisations" class="btn btn-primary">Voir le tableau de compétences</a>
@@ -653,16 +703,16 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
       <div class="wrap">
         <div class="eyebrow-num">03</div>
         <h2 class="title">Compétences &amp; réalisations</h2>
-        <p class="lede">Le cœur de ce portfolio : le tableau de synthèse des réalisations professionnelles de l'épreuve E5. Un projet, six blocs de compétences du référentiel. Cliquez sur un bloc actif pour dérouler les sous-compétences visées et les preuves associées.</p>
+        <p class="lede">Le cœur de ce portfolio : le tableau de synthèse des réalisations professionnelles de l'épreuve E5. Un projet, six blocs de compétences du référentiel : cliquez sur un bloc actif pour dérouler les sous-compétences visées et les preuves associées.</p>
 
         <div class="proj-tabs">
           <button class="proj-tab active" data-proj="etoile">
             <span class="tt">L'étoile du jeu</span>
-            Site web associatif: formation
+            Site web associatif : formation
           </button>
           <button class="proj-tab" data-proj="frscv">
             <span class="tt">Stage FR SCV</span>
-            WebGL vs WebGPU: 1ère année
+            WebGL vs WebGPU : 1ère année
           </button>
           <button class="proj-tab" data-proj="annee2">
             <span class="tt">2ᵉ année</span>
@@ -889,40 +939,39 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
       <div class="wrap">
         <div class="eyebrow-num">06</div>
         <h2 class="title">Projets personnels</h2>
-        <p class="lede">Ce que je construis en dehors de la formation : reflet de ma polyvalence.</p>
+        <p class="lede">Ce que je construis en dehors de la formation : reflet de ma polyvalence. Cliquez une carte pour ouvrir le projet.</p>
 
         <div class="proj-grid">
-          <div class="pcard">
+          <a class="pcard" href="https://www.n1tier.com/" target="_blank">
             <div class="kicker">Web · collaboration</div>
             <h3>n1Tier</h3>
             <p>Site de tier list personnalisé autour du jeu « Narrow One », développé en JavaScript, HTML et CSS en collaboration avec les développeurs du jeu.</p>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://toshysna.github.io/Space-snake/" target="_blank">
             <div class="kicker">Jeu vidéo · JavaScript</div>
             <h3>Space Snake</h3>
             <p>Jeu inspiré de Snake, développé en JavaScript et hébergé sur itch.io.</p>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://toshysna.itch.io/the-green-cube" target="_blank">
             <div class="kicker">Jeu vidéo · Unity / C#</div>
             <h3>The Green Cube</h3>
             <p>Prototype de jeu 3D développé sous Unity en C#, hébergé sur itch.io.</p>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://github.com/bst04/cybersources" target="_blank">
             <div class="kicker">Open source</div>
             <h3>Cybersource</h3>
             <p>Bibliothèque numérique open-source. Contributeur principal.</p>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://github.com/toshysna/Scanner-de-port" target="_blank">
             <div class="kicker">Outil réseau</div>
             <h3>Scanner de port</h3>
             <p>Outil de scan de ports, code source disponible sur GitHub.</p>
-            <div class="links"><a href="https://github.com/toshysna/Scanner-de-port" target="_blank">GitHub ↗</a></div>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://toshysna.github.io/Toshysna-Hub/" target="_blank">
             <div class="kicker">Portfolio</div>
             <h3>Toshysna Hub</h3>
             <p>Ancien site portfolio expérimental : terrain d'essai pour l'intégration front-end.</p>
-          </div>
+          </a>
           <div class="pcard">
             <div class="kicker">Création 3D</div>
             <h3>Travaux 3D</h3>
@@ -943,24 +992,21 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
               <a href="https://www.youtube.com/@Toshysna" target="_blank">YouTube ↗</a>
             </div>
           </div>
-          <div class="pcard">
+          <a class="pcard" href="https://www.notion.so/PHOTOSHOP-WORKS-2d53f400ad5c804d8e6bd14e7a057260?source=copy_link" target="_blank">
             <div class="kicker">Illustration</div>
             <h3>Photoshop works</h3>
             <p>Sélection de travaux d'illustration et de retouche.</p>
-            <div class="links"><a href="https://www.notion.so/PHOTOSHOP-WORKS-2d53f400ad5c804d8e6bd14e7a057260?source=copy_link" target="_blank">Voir sur Notion ↗</a></div>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://www.notion.so/A-Fragment-of-Time-2d53f400ad5c801cb149f5b547ebb40e?source=copy_link" target="_blank">
             <div class="kicker">Vidéo</div>
             <h3>A Fragment of Time</h3>
             <p>Court-métrage réalisé et monté personnellement.</p>
-            <div class="links"><a href="https://www.notion.so/A-Fragment-of-Time-2d53f400ad5c801cb149f5b547ebb40e?source=copy_link" target="_blank">Voir sur Notion ↗</a></div>
-          </div>
-          <div class="pcard">
+          </a>
+          <a class="pcard" href="https://etoiledujeu.mistivia.fr/association" target="_blank">
             <div class="kicker">Fullstack · duo</div>
             <h3>L'étoile du jeu</h3>
             <p>Site web associatif développé en binôme : détaillé dans le tableau de compétences ci-dessus.</p>
-            <div class="links"><a href="https://etoiledujeu.mistivia.fr/association" target="_blank">Voir le site ↗</a></div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -970,18 +1016,37 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
       <div class="wrap">
         <div class="eyebrow-num">07</div>
         <h2 class="title">Recommandation</h2>
-        <div class="reco-card">
-          <div class="reco-head">
-            <div class="reco-avatar">JV</div>
-            <div>
-              <div class="reco-name">Jesper van den Ende</div>
-              <div class="reco-role">Co-fondateur de <a href="https://pelicanparty.co/#home" target="_blank">Pelican Party Studios</a> · créateur de <a href="https://narrow.one/" target="_blank">Narrow One</a></div>
+        <div class="reco-grid">
+          <div class="reco-card">
+            <div class="reco-head">
+              <a class="reco-avatar-link" href="https://github.com/jespertheend" target="_blank">
+  <img src="jesper.png" alt="Jesper van den Ende">
+</a>
+              <div>
+                <div class="reco-name">Jesper van den Ende</div>
+                <div class="reco-role">Co-fondateur de <a href="https://pelicanparty.co/#home" target="_blank">Pelican Party Studios</a> · créateur de <a href="https://narrow.one/" target="_blank">Narrow One</a></div>
+              </div>
+            </div>
+            <div class="reco-body">
+              <p>« To whom it may concern, I am writing to recommend Anselme in support of his application for an internship. I have had the opportunity to work with Anselme on a number of projects, and I have consistently found him to be motivated and eager to learn.</p>
+              <p>He demonstrated reliability and a clear interest in software development. Based on our interactions, it is evident that he is motivated to grow his programming skills and is comfortable working with technical tools and feedback.</p>
+              <p>I believe Anselme would be a reliable and valuable addition to any team looking for an intern with strong potential. »</p>
             </div>
           </div>
-          <div class="reco-body">
-            <p>« To whom it may concern, I am writing to recommend Toshysna in support of his application for an internship. I have had the opportunity to work with Toshysna on a number of projects, and I have consistently found him to be motivated and eager to learn.</p>
-            <p>He demonstrated reliability and a clear interest in software development. Based on our interactions, it is evident that he is motivated to grow his programming skills and is comfortable working with technical tools and feedback.</p>
-            <p>I believe Toshysna would be a reliable and valuable addition to any team looking for an intern with strong potential. »</p>
+
+          <div class="reco-card empty">
+            <div class="reco-head">
+              <a class="reco-avatar-link" href="https://pepr-iccare.fr/team-member/mohamed-ladrouz/" target="_blank">
+  <img src="mohamed_ladrouz.jpg" alt="Mohamed Ladrouz">
+</a>
+              <div>
+                <div class="reco-name">Mohamed Ladrouz</div>
+                <div class="reco-role">Ingénieur de Recherche &amp; responsable technique, FR SCV (FR CNRS 2052) : tuteur de stage</div>
+              </div>
+            </div>
+            <div class="reco-body">
+              <p class="placeholder">Citation à venir.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -997,13 +1062,13 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
           <div class="contact-list">
             <a href="https://www.github.com/toshysna" target="_blank">GitHub : @toshysna</a>
             <a href="https://rive.app/@toshysna/" target="_blank">Rive : @toshysna</a>
-            <a href="https://www.instagram.com/toshysna_3d/" target="_blank">Instagram : 3D</a>
-            <a href="https://www.instagram.com/toshysna_rive/" target="_blank">Instagram : Rive</a>
+            <a href="https://discord.com/users/1327220211937710117" target="_blank">Discord : @toshysna</a>
+            <a href="https://www.instagram.com/toshysna_rive/" target="_blank">Instagram : @toshysna_rive</a>
           </div>
           <div class="contact-list">
-            <div>E-mail<span>à compléter</span></div>
-            <div>Téléphone<span>à compléter</span></div>
-            <div>LinkedIn<span>à compléter</span></div>
+            <div>E-mail<span>toshysna@proton.me</span></div>
+            <div>Téléphone<span>06 32 51 85 30</span></div>
+            
           </div>
         </div>
       </div>
@@ -1017,8 +1082,10 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
 // mobile menu
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
-menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+}
 
 // active nav link on scroll
 const navLinks = document.querySelectorAll('.sidenav nav a');
