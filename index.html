@@ -337,6 +337,9 @@ h2.title{
 .comp-detail ul:last-child{margin-bottom:0;}
 .comp-detail li{margin-bottom:6px;}
 .comp-detail .proof{color:var(--text-dim); font-size:0.92rem;}
+.comp-detail .proof a{color:var(--blue);}
+.comp-detail .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;}
+.comp-detail .links a{color:var(--blue); font-size:0.85rem;}
 
 .tag-soon{
   display:inline-block;
@@ -714,6 +717,10 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             <span class="tt">Stage FR SCV</span>
             WebGL vs WebGPU : 1ère année
           </button>
+          <button class="proj-tab" data-proj="veille">
+            <span class="tt">Veille technologique</span>
+            Accessibilité numérique : 1ère année
+          </button>
           <button class="proj-tab" data-proj="annee2">
             <span class="tt">2ᵉ année</span>
             À venir
@@ -740,7 +747,8 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             <h4>Sous-compétences visées</h4>
             <ul><li>Vérifier le respect des règles d'utilisation des ressources numériques.</li></ul>
             <h4>Preuves associées</h4>
-            <p class="proof">RGPD.</p>
+            <p class="proof">Nous avons 2 pages dédiées au respect de la RGPD: Les mentions légales ainsi que les conditions générales d'utilisation</p>
+            <div class="links"><a href="https://etoiledujeu.mistivia.fr/cgu" target="_blank">CGU ↗</a><a href="https://etoiledujeu.mistivia.fr/terms" target="_blank">Mentions légales ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="etoile-2">
             <h4>Sous-compétences visées</h4>
@@ -751,6 +759,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Demande initiale du président de l'association : un site web moderne et accessible qui répond à un besoin pour les personnes âgées. Guide détaillé d'utilisation de toute l'interface d'administration du site.</p>
+            <div class="links"><a href="https://docs.google.com/document/d/1ntYvfqKgUD-RLms3M1WJ2DwZo-rOD45kH3NpRzWc3CY/edit?usp=drivesdk" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="etoile-3">
             <h4>Sous-compétences visées</h4>
@@ -761,6 +770,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Gestion des membres, des articles, du planning de l'association, des pages du site et des images. Stratégie de communication, stratégie de performance web, solutions de référencement et d'hébergement.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="etoile-4">
             <h4>Sous-compétences visées</h4>
@@ -771,6 +781,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Suivi du planning détaillé heure par heure, chaque tâche associée. Fonctionnalités sous forme de to-do liste régulièrement mise à jour avec les modifications demandées par les admins de l'association.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
         </div>
 
@@ -798,6 +809,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Étude comparative WebGL vs WebGPU, analyse de l'obsolescence programmée de WebGL et évaluation de WebGPU comme standard de remplacement. Voyager et eCorpus mobilisés comme référentiels techniques existants. Identification des normes glTF 2.0 et WebGPU comme standards émergents du secteur.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="frscv-2">
             <h4>Sous-compétences visées</h4>
@@ -807,6 +819,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Demande initiale du tuteur : évaluer la faisabilité du remplacement de WebGL par WebGPU dans Voyager. Viewers WebGL et WebGPU fonctionnels produits en réponse. Tableaux comparatifs de métriques (FPS, frametime, draw calls, VRAM, coût CPU). Synthèse comparative finale transmise au tuteur. Journal de bord documentant le cycle complet de résolution.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="frscv-3">
             <h4>Sous-compétences visées</h4>
@@ -816,6 +829,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Contribution directe à l'évolution de Voyager, moteur de rendu WebGL de la plateforme eCorpus. Étude d'intégration de WebGPU dans l'écosystème eCorpus. Tests sur assets patrimoniaux réels hébergés par eCorpus. Présentation des résultats au réseau Continuum, réseau national de plus de 30 fédérations de recherche.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="frscv-4">
             <h4>Sous-compétences visées</h4>
@@ -826,6 +840,7 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Journal de bord quotidien sur 8 jours documentés. Tableau de suivi des tâches par journée avec statuts. Pages Notion structurées par thématique (viewers, comparatifs, extraits de code, scanner Artec Leo). Livrables fonctionnels conformes aux attentes du tuteur. Présentation nationale des résultats au réseau Continuum.</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
           <div class="comp-detail" data-detail="frscv-6">
             <h4>Sous-compétences visées</h4>
@@ -837,10 +852,39 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             </ul>
             <h4>Preuves associées</h4>
             <p class="proof">Veille technologique active sur WebGPU, glTF 2.0, PBR, compute shaders et standards 3D web. Apprentissage autonome de WGSL, WebGL2, du pipeline de rendu 3D et d'un parseur GLB écrit depuis zéro. Prise en main du scanner Artec Leo et documentation de la procédure. Présentation nationale au réseau Continuum valorisant le profil professionnel. Environnement d'apprentissage structuré sur Notion (journal, synthèses, pages techniques).</p>
+            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
           </div>
         </div>
 
-        <!-- PROJET 3 : 2E ANNEE -->
+        <!-- PROJET 3 : VEILLE TECHNOLOGIQUE -->
+        <div class="proj-panel" id="panel-veille">
+          <div class="proj-meta">
+            <div class="period">1ère année de BTS : veille technologique individuelle</div>
+            <div class="links"><a href="#" target="_blank">Voir la page Notion ↗</a></div>
+          </div>
+
+          <div class="comp-grid">
+            <div class="comp-card inactive"><div class="num">Bloc 1</div><div class="label">Gérer le patrimoine informatique</div></div>
+            <div class="comp-card inactive"><div class="num">Bloc 2</div><div class="label">Répondre aux incidents et demandes</div></div>
+            <div class="comp-card inactive"><div class="num">Bloc 3</div><div class="label">Développer la présence en ligne</div></div>
+            <div class="comp-card inactive"><div class="num">Bloc 4</div><div class="label">Travailler en mode projet</div></div>
+            <div class="comp-card inactive"><div class="num">Bloc 5</div><div class="label">Mettre à disposition un service informatique</div></div>
+            <div class="comp-card mobilisee" data-block="6" data-proj="veille"><div class="num">Bloc 6</div><div class="label">Organiser son développement professionnel</div></div>
+          </div>
+
+          <div class="comp-detail" data-detail="veille-6">
+            <h4>Sous-compétences visées</h4>
+            <ul>
+              <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
+              <li>Mettre en place son environnement d'apprentissage personnel.</li>
+            </ul>
+            <h4>Preuves associées</h4>
+            <p class="proof">Veille sur l'accessibilité numérique (RGAA / WCAG), choisie en écho à la demande initiale du projet L'étoile du jeu : un site pensé pour un public de personnes âgées. Trois sources croisées : le référentiel <a href="https://accessibilite.numerique.gouv.fr/" target="_blank">RGAA de la DINUM</a> (quatre principes POUR, critères techniques), les <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG du W3C</a> (norme internationale dont le RGAA est la déclinaison française), et une étude chiffrée sur l'accessibilité pour un public senior justifiant le choix du thème. Synthèse et argumentaire documentés sur une page Notion dédiée.</p>
+            <div class="links"><a href="https://app.notion.com/p/Veille-technologique-l-accessibilit-num-rique-RGAA-WCAG-3e3fe5e2613a80479739ee809d0b96da" target="_blank">Voir la preuve ↗</a></div>
+          </div>
+        </div>
+
+        <!-- PROJET 4 : 2E ANNEE -->
         <div class="proj-panel" id="panel-annee2">
           <div class="proj-meta">
             <div class="period">Réalisations en milieu professionnel : seconde année</div>
