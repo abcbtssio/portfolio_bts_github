@@ -257,7 +257,53 @@ h2.title{
 .bio-grid strong{color:var(--text); font-weight:600;}
 @media (max-width:760px){.bio-grid{grid-template-columns:1fr;}}
 
-/* ---------- Competency matrix (the core) ---------- */
+/* ---------- Competency matrix (synthèse) ---------- */
+
+.matrix-wrap{overflow-x:auto; margin-bottom:40px;}
+table.matrix{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  font-size:0.88rem;
+}
+.matrix th, .matrix td{
+  padding:12px 14px;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+.matrix tr:last-child th, .matrix tr:last-child td{border-bottom:none;}
+.matrix thead th{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8rem;
+  color:var(--text-dim);
+  font-weight:600;
+  background:var(--surface-alt);
+}
+.matrix tbody th{
+  text-align:left;
+  font-weight:500;
+  color:var(--text);
+  border-right:1px solid var(--border);
+}
+.matrix tbody th .num{color:var(--blue); font-family:'Space Grotesk',sans-serif; font-size:0.78rem; margin-right:8px;}
+.matrix td.off{color:var(--border);}
+.matrix .dot-btn{
+  background:none;
+  border:1px solid transparent;
+  color:var(--blue);
+  font-size:1.05rem;
+  width:34px; height:34px;
+  border-radius:50%;
+  cursor:pointer;
+  transition:background .15s, border-color .15s;
+}
+.matrix .dot-btn:hover{background:var(--blue-dim); border-color:var(--blue);}
+
+/* ---------- Onglets projets ---------- */
 
 .proj-tabs{
   display:flex;
@@ -271,10 +317,14 @@ h2.title{
   border:1px solid var(--border);
   background:var(--surface);
   color:var(--text-dim);
+  font-family:'Inter',sans-serif;
   font-size:0.88rem;
+  line-height:1.4;
   cursor:pointer;
   text-align:left;
+  transition:border-color .15s, background .15s;  
 }
+.proj-tab:hover{border-color:var(--blue);}
 .proj-tab .tt{display:block; color:var(--text); font-weight:600; font-size:0.92rem; margin-bottom:2px;}
 .proj-tab.active{border-color:var(--blue); background:var(--blue-dim);}
 .proj-tab.active .tt{color:#fff;}
@@ -282,73 +332,120 @@ h2.title{
 .proj-panel{display:none;}
 .proj-panel.active{display:block;}
 
+/* ---------- En-tête de projet (titre + lien) ---------- */
+
 .proj-meta{
   display:flex;
   justify-content:space-between;
-  align-items:baseline;
+  align-items:center;
   flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:26px;
-  padding-bottom:20px;
+  gap:14px;
+  margin-bottom:22px;
+  padding-bottom:18px;
   border-bottom:1px solid var(--border);
 }
-.proj-meta .period{color:var(--text-dim); font-size:0.88rem;}
+.proj-meta .period{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.2rem;
+  font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--text);
+  line-height:1.3;
+  max-width:60ch;
+}
+.proj-meta .links{display:flex; gap:10px; flex-wrap:wrap;}
 .proj-meta .links a{
-  color:var(--blue);
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:10px;
+  border:1px solid var(--blue);
+  background:var(--blue-dim);
+  color:#fff;
   font-size:0.85rem;
-  margin-left:14px;
+  font-weight:500;
+  white-space:nowrap;
+  transition:background .15s, transform .12s;
 }
+.proj-meta .links a:hover{background:var(--blue); color:#0A0E16; transform:translateY(-2px);}
 
-.comp-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:12px;
-  margin-bottom:6px;
-}
-@media (max-width:700px){.comp-grid{grid-template-columns:1fr 1fr;}}
+/* ---------- Tableau détaillé par projet ---------- */
 
-.comp-card{
+table.comp-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
   border:1px solid var(--border);
   border-radius:var(--radius);
-  padding:16px 16px;
+  overflow:hidden;
   background:var(--surface);
-  cursor:pointer;
-  transition:border-color .15s, background .15s;
 }
-.comp-card .num{font-family:'Space Grotesk',sans-serif; font-size:0.78rem; color:var(--text-dim);}
-.comp-card .label{font-size:0.9rem; margin-top:6px; font-weight:500; line-height:1.3;}
-.comp-card.mobilisee{border-color:var(--blue);}
-.comp-card.mobilisee .num{color:var(--blue);}
-.comp-card.mobilisee:hover{background:var(--blue-dim);}
-.comp-card.inactive{opacity:0.38; cursor:default;}
-.comp-card.open{background:var(--blue-dim); border-color:var(--blue);}
-
-.comp-detail{
-  display:none;
-  margin-top:18px;
-  padding:22px 24px;
-  border-radius:var(--radius);
+.comp-table thead th{
+  text-align:left;
+  padding:12px 18px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.8rem;
+  color:var(--blue);
+  font-weight:600;
   background:var(--surface-alt);
-  border:1px solid var(--border);
+  border-bottom:1px solid var(--border);
 }
-.comp-detail.open{display:block;}
-.comp-detail h4{font-size:0.82rem; color:var(--blue); margin-bottom:8px;}
-.comp-detail ul{margin:0 0 18px 18px; color:var(--text-dim); font-size:0.92rem;}
-.comp-detail ul:last-child{margin-bottom:0;}
-.comp-detail li{margin-bottom:6px;}
-.comp-detail .proof{color:var(--text-dim); font-size:0.92rem;}
-.comp-detail .proof a{color:var(--blue);}
-.comp-detail .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;}
-.comp-detail .links a{color:var(--blue); font-size:0.85rem;}
+.comp-table td, .comp-table tbody th{
+  padding:18px;
+  vertical-align:top;
+  text-align:left;
+  border-bottom:1px solid var(--border);
+}
+.comp-table tbody tr:last-child td,
+.comp-table tbody tr:last-child th{border-bottom:none;}
+.comp-table tbody th{
+  width:200px;
+  font-weight:600;
+  font-size:0.92rem;
+  line-height:1.35;
+  border-right:1px solid var(--border);
+  border-left:3px solid var(--blue);
+}
+.comp-table tbody th .num{
+  display:block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.78rem;
+  color:var(--blue);
+  margin-bottom:4px;
+}
+.comp-table td.sub{width:32%;}
+.comp-table ul{margin:0 0 0 16px; color:var(--text-dim); font-size:0.9rem;}
+.comp-table li{margin-bottom:6px;}
+.comp-table li:last-child{margin-bottom:0;}
+.comp-table .proof{color:var(--text-dim); font-size:0.9rem;}
+.comp-table .proof a{color:var(--blue);}
+.comp-table .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;}
+.comp-table .links a{color:var(--blue); font-size:0.85rem;}
+.comp-table .links a:hover{text-decoration:underline;}
+
+.comp-table tr.flash th, .comp-table tr.flash td{animation:flash 1.6s ease;}
+@keyframes flash{
+  0%,60%{background:var(--blue-dim);}
+  100%{background:transparent;}
+}
 
 .tag-soon{
   display:inline-block;
-  margin-top:6px;
+  margin-top:10px;
   font-size:0.78rem;
   padding:4px 10px;
   border-radius:20px;
   border:1px dashed var(--border);
   color:var(--text-dim);
+}
+
+@media (max-width:760px){
+  .comp-table thead{display:none;}
+  .comp-table, .comp-table tbody, .comp-table tr, .comp-table th, .comp-table td{display:block; width:100%;}
+  .comp-table tbody th{width:100%; border-right:none; border-bottom:none; padding-bottom:6px;}
+  .comp-table td.sub{width:100%; padding-top:6px; padding-bottom:6px;}
+  .comp-table tbody tr{border-bottom:1px solid var(--border);}
+  .comp-table tbody tr:last-child{border-bottom:none;}
+  .comp-table td{border-bottom:none;}
 }
 
 /* ---------- Deep dive stage ---------- */
@@ -701,25 +798,84 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
       </div>
     </section>
 
-    <!-- COMPETENCES & REALISATIONS (coeur : le tableau excel) -->
+    <!-- COMPETENCES & REALISATIONS -->
     <section id="competences-realisations">
       <div class="wrap">
         <div class="eyebrow-num">03</div>
         <h2 class="title">Compétences &amp; réalisations</h2>
-        <p class="lede">Le cœur de ce portfolio : le tableau de synthèse des réalisations professionnelles de l'épreuve E5. Un projet, six blocs de compétences du référentiel : cliquez sur un bloc actif pour dérouler les sous-compétences visées et les preuves associées.</p>
+        <p class="lede">Le cœur de ce portfolio : le tableau de synthèse des réalisations professionnelles de l'épreuve E5. Un projet, six blocs de compétences du référentiel : cliquez sur un point de la matrice pour accéder directement aux sous-compétences visées et aux preuves associées.</p>
+
+        <!-- MATRICE DE SYNTHESE -->
+        <div class="matrix-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th></th>
+                <th>L'étoile du jeu</th>
+                <th>Stage FR SCV</th>
+                <th>Veille technologique</th>
+                <th>2ᵉ année</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th><span class="num">Bloc 1</span>Gérer le patrimoine informatique</th>
+                <td><button class="dot-btn" data-proj="etoile" data-block="1" aria-label="Voir le bloc 1 : L'étoile du jeu">●</button></td>
+                <td><button class="dot-btn" data-proj="frscv" data-block="1" aria-label="Voir le bloc 1 : Stage FR SCV">●</button></td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+              </tr>
+              <tr>
+                <th><span class="num">Bloc 2</span>Répondre aux incidents et demandes</th>
+                <td><button class="dot-btn" data-proj="etoile" data-block="2" aria-label="Voir le bloc 2 : L'étoile du jeu">●</button></td>
+                <td><button class="dot-btn" data-proj="frscv" data-block="2" aria-label="Voir le bloc 2 : Stage FR SCV">●</button></td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+              </tr>
+              <tr>
+                <th><span class="num">Bloc 3</span>Développer la présence en ligne</th>
+                <td><button class="dot-btn" data-proj="etoile" data-block="3" aria-label="Voir le bloc 3 : L'étoile du jeu">●</button></td>
+                <td><button class="dot-btn" data-proj="frscv" data-block="3" aria-label="Voir le bloc 3 : Stage FR SCV">●</button></td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+              </tr>
+              <tr>
+                <th><span class="num">Bloc 4</span>Travailler en mode projet</th>
+                <td><button class="dot-btn" data-proj="etoile" data-block="4" aria-label="Voir le bloc 4 : L'étoile du jeu">●</button></td>
+                <td><button class="dot-btn" data-proj="frscv" data-block="4" aria-label="Voir le bloc 4 : Stage FR SCV">●</button></td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+              </tr>
+              <tr>
+                <th><span class="num">Bloc 5</span>Mettre à disposition un service informatique</th>
+                <td class="off">·</td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+                <td class="off">·</td>
+              </tr>
+              <tr>
+                <th><span class="num">Bloc 6</span>Organiser son développement professionnel</th>
+                <td class="off">·</td>
+                <td><button class="dot-btn" data-proj="frscv" data-block="6" aria-label="Voir le bloc 6 : Stage FR SCV">●</button></td>
+                <td><button class="dot-btn" data-proj="veille" data-block="6" aria-label="Voir le bloc 6 : Veille technologique">●</button></td>
+                <td class="off">·</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
         <div class="proj-tabs">
           <button class="proj-tab active" data-proj="etoile">
             <span class="tt">L'étoile du jeu</span>
-            Site web associatif : formation
+            Site web associatif
           </button>
           <button class="proj-tab" data-proj="frscv">
-            <span class="tt">Stage FR SCV</span>
-            WebGL vs WebGPU : 1ère année
+            <span class="tt">Moteur de rendu 3D</span>
+            Etude comparative: WebGL vs WebGPU
           </button>
           <button class="proj-tab" data-proj="veille">
             <span class="tt">Veille technologique</span>
-            Accessibilité numérique : 1ère année
+            Accessibilité numérique
           </button>
           <button class="proj-tab" data-proj="annee2">
             <span class="tt">2ᵉ année</span>
@@ -734,155 +890,187 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
             <div class="links"><a href="https://etoiledujeu.mistivia.fr/association" target="_blank">Voir le site ↗</a></div>
           </div>
 
-          <div class="comp-grid">
-            <div class="comp-card mobilisee" data-block="1" data-proj="etoile"><div class="num">Bloc 1</div><div class="label">Gérer le patrimoine informatique</div></div>
-            <div class="comp-card mobilisee" data-block="2" data-proj="etoile"><div class="num">Bloc 2</div><div class="label">Répondre aux incidents et demandes</div></div>
-            <div class="comp-card mobilisee" data-block="3" data-proj="etoile"><div class="num">Bloc 3</div><div class="label">Développer la présence en ligne</div></div>
-            <div class="comp-card mobilisee" data-block="4" data-proj="etoile"><div class="num">Bloc 4</div><div class="label">Travailler en mode projet</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 5</div><div class="label">Mettre à disposition un service informatique</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 6</div><div class="label">Organiser son développement professionnel</div></div>
-          </div>
-
-          <div class="comp-detail" data-detail="etoile-1">
-            <h4>Sous-compétences visées</h4>
-            <ul><li>Vérifier le respect des règles d'utilisation des ressources numériques.</li></ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Nous avons 2 pages dédiées au respect de la RGPD: Les mentions légales ainsi que les conditions générales d'utilisation</p>
-            <div class="links"><a href="https://etoiledujeu.mistivia.fr/cgu" target="_blank">CGU ↗</a><a href="https://etoiledujeu.mistivia.fr/terms" target="_blank">Mentions légales ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="etoile-2">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Collecter, suivre et orienter des demandes.</li>
-              <li>Traiter des demandes concernant les services réseau et système, applicatifs.</li>
-              <li>Traiter des demandes concernant les applications.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Demande initiale du président de l'association : un site web moderne et accessible qui répond à un besoin pour les personnes âgées. Guide détaillé d'utilisation de toute l'interface d'administration du site.</p>
-            <div class="links"><a href="https://docs.google.com/document/d/1ooCj-k-aISejZftPCuL7zfBagGl1TpAlG-ZmcYKYehM/edit?usp=drivesdk" target="_blank">Voir la preuve ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="etoile-3">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques.</li>
-              <li>Référencer les services en ligne de l'organisation et mesurer leur visibilité.</li>
-              <li>Participer à l'évolution d'un site Web exploitant les données de l'organisation.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Gestion des membres, des articles, du planning de l'association, des pages du site et des images. Stratégie de communication, stratégie de performance web, solutions de référencement et d'hébergement.</p>
-            <div class="links"><a href="https://app.notion.com/p/Strat-gie-Communication-2e73f400ad5c80b6867afbe4fa637b65?source=copy_link" target="_blank">Strategie de communication ↗</a></div>
-            <div class="links"><a href="https://app.notion.com/p/Solution-de-R-f-rencement-2e73f400ad5c802eac44d6fdb9f96ba8?source=copy_link" target="_blank">Referencement ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="etoile-4">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Analyser les objectifs et les modalités d'organisation d'un projet.</li>
-              <li>Planifier les activités.</li>
-              <li>Évaluer les indicateurs de suivi d'un projet et analyser les écarts.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Suivi du planning détaillé heure par heure, chaque tâche associée. Fonctionnalités sous forme de to-do liste régulièrement mise à jour avec les modifications demandées par les admins de l'association.</p>
-            <div class="links"><a href="https://app.notion.com/p/2f53f400ad5c80fe9cf2da1ed1db5e69?v=2f53f400ad5c81cc9d50000c8e86d74c" target="_blank">Planning détaillé ↗</a></div>
-          </div>
+          <table class="comp-table">
+            <thead>
+              <tr><th>Bloc</th><th>Sous-compétences visées</th><th>Preuves associées</th></tr>
+            </thead>
+            <tbody>
+              <tr id="row-etoile-1">
+                <th scope="row"><span class="num">Bloc 1</span>Gérer le patrimoine informatique</th>
+                <td class="sub"><ul><li>Vérifier le respect des règles d'utilisation des ressources numériques.</li></ul></td>
+                <td>
+                  <p class="proof">Nous avons 2 pages dédiées au respect de la RGPD: Les mentions légales ainsi que les conditions générales d'utilisation</p>
+                  <div class="links"><a href="https://etoiledujeu.mistivia.fr/cgu" target="_blank">CGU ↗</a><a href="https://etoiledujeu.mistivia.fr/terms" target="_blank">Mentions légales ↗</a></div>
+                </td>
+              </tr>
+              <tr id="row-etoile-2">
+                <th scope="row"><span class="num">Bloc 2</span>Répondre aux incidents et demandes</th>
+                <td class="sub">
+                  <ul>
+                    <li>Collecter, suivre et orienter des demandes.</li>
+                    <li>Traiter des demandes concernant les services réseau et système, applicatifs.</li>
+                    <li>Traiter des demandes concernant les applications.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Demande initiale du président de l'association : un site web moderne et accessible qui répond à un besoin pour les personnes âgées. Guide détaillé d'utilisation de toute l'interface d'administration du site.</p>
+                  <div class="links"><a href="https://docs.google.com/document/d/1ooCj-k-aISejZftPCuL7zfBagGl1TpAlG-ZmcYKYehM/edit?usp=drivesdk" target="_blank">Guide détaillé ↗</a></div>
+                </td>
+              </tr>
+              <tr id="row-etoile-3">
+                <th scope="row"><span class="num">Bloc 3</span>Développer la présence en ligne</th>
+                <td class="sub">
+                  <ul>
+                    <li>Participer à la valorisation de l'image de l'organisation sur les médias numériques en tenant compte du cadre juridique et des enjeux économiques.</li>
+                    <li>Référencer les services en ligne de l'organisation et mesurer leur visibilité.</li>
+                    <li>Participer à l'évolution d'un site Web exploitant les données de l'organisation.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Gestion des membres, des articles, du planning de l'association, des pages du site et des images. Stratégie de communication, stratégie de performance web, solutions de référencement et d'hébergement.</p>
+                  <div class="links">
+                    <a href="https://app.notion.com/p/Strat-gie-Communication-2e73f400ad5c80b6867afbe4fa637b65?source=copy_link" target="_blank">Strategie de communication ↗</a>
+                    <a href="https://app.notion.com/p/Solution-de-R-f-rencement-2e73f400ad5c802eac44d6fdb9f96ba8?source=copy_link" target="_blank">Referencement ↗</a>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-etoile-4">
+                <th scope="row"><span class="num">Bloc 4</span>Travailler en mode projet</th>
+                <td class="sub">
+                  <ul>
+                    <li>Analyser les objectifs et les modalités d'organisation d'un projet.</li>
+                    <li>Planifier les activités.</li>
+                    <li>Évaluer les indicateurs de suivi d'un projet et analyser les écarts.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Suivi du planning détaillé heure par heure, chaque tâche associée. Fonctionnalités sous forme de to-do liste régulièrement mise à jour avec les modifications demandées par les admins de l'association.</p>
+                  <div class="links"><a href="https://app.notion.com/p/2f53f400ad5c80fe9cf2da1ed1db5e69?v=2f53f400ad5c81cc9d50000c8e86d74c" target="_blank">Planning détaillé ↗</a></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- PROJET 2 : FR SCV -->
         <div class="proj-panel" id="panel-frscv">
           <div class="proj-meta">
-            <div class="period">Du 26/05/26 au 03/07/26 : réalisation en milieu professionnel, 1ère année</div>
+            <div class="period">Du 26/05/26 au 03/07/26 : réalisation d'un moteur de rendu 3D en Javascript pour comparer 2 APIs: WebGL VS WebGPU</div>
             <div class="links"><a href="#stage">Zoom sur le stage ↓</a></div>
           </div>
 
-          <div class="comp-grid">
-            <div class="comp-card mobilisee" data-block="1" data-proj="frscv"><div class="num">Bloc 1</div><div class="label">Gérer le patrimoine informatique</div></div>
-            <div class="comp-card mobilisee" data-block="2" data-proj="frscv"><div class="num">Bloc 2</div><div class="label">Répondre aux incidents et demandes</div></div>
-            <div class="comp-card mobilisee" data-block="3" data-proj="frscv"><div class="num">Bloc 3</div><div class="label">Développer la présence en ligne</div></div>
-            <div class="comp-card mobilisee" data-block="4" data-proj="frscv"><div class="num">Bloc 4</div><div class="label">Travailler en mode projet</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 5</div><div class="label">Mettre à disposition un service informatique</div></div>
-            <div class="comp-card mobilisee" data-block="6" data-proj="frscv"><div class="num">Bloc 6</div><div class="label">Organiser son développement professionnel</div></div>
-          </div>
-
-          <div class="comp-detail" data-detail="frscv-1">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Exploiter des référentiels, normes et standards adoptés par le prestataire informatique.</li>
-              <li>Vérifier les conditions de la continuité d'un service informatique.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Étude comparative WebGL vs WebGPU, analyse de l'obsolescence programmée de WebGL et évaluation de WebGPU comme standard de remplacement. Voyager et eCorpus mobilisés comme référentiels techniques existants. Identification des normes glTF 2.0 et WebGPU comme standards émergents du secteur.</p>
-            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="frscv-2">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Collecter, suivre et orienter des demandes.</li>
-              <li>Traiter des demandes concernant les applications.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Demande initiale du tuteur : évaluer la faisabilité du remplacement de WebGL par WebGPU dans Voyager. Viewers WebGL et WebGPU fonctionnels produits en réponse. Tableaux comparatifs de métriques (FPS, frametime, draw calls, VRAM, coût CPU). Synthèse comparative finale transmise au tuteur. Journal de bord documentant le cycle complet de résolution.</p>
-            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="frscv-3">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Participer à l'évolution d'un site Web exploitant les données de l'organisation.</li>
-              <li>Participer à la valorisation de l'image de l'organisation sur les médias numériques.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Contribution directe à l'évolution de Voyager, moteur de rendu WebGL de la plateforme eCorpus. Étude d'intégration de WebGPU dans l'écosystème eCorpus. Tests sur assets patrimoniaux réels hébergés par eCorpus. Présentation des résultats au réseau Continuum, réseau national de plus de 30 fédérations de recherche.</p>
-            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="frscv-4">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Analyser les objectifs et les modalités d'organisation d'un projet.</li>
-              <li>Planifier les activités.</li>
-              <li>Évaluer les indicateurs de suivi d'un projet et analyser les écarts.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Journal de bord quotidien sur 8 jours documentés. Tableau de suivi des tâches par journée avec statuts. Pages Notion structurées par thématique (viewers, comparatifs, extraits de code, scanner Artec Leo). Livrables fonctionnels conformes aux attentes du tuteur. Présentation nationale des résultats au réseau Continuum.</p>
-            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
-          </div>
-          <div class="comp-detail" data-detail="frscv-6">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Mettre en place son environnement d'apprentissage personnel.</li>
-              <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
-              <li>Gérer son identité professionnelle.</li>
-              <li>Développer son projet professionnel.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Veille technologique active sur WebGPU, glTF 2.0, PBR, compute shaders et standards 3D web. Apprentissage autonome de WGSL, WebGL2, du pipeline de rendu 3D et d'un parseur GLB écrit depuis zéro. Prise en main du scanner Artec Leo et documentation de la procédure. Présentation nationale au réseau Continuum valorisant le profil professionnel. Environnement d'apprentissage structuré sur Notion (journal, synthèses, pages techniques).</p>
-            <div class="links"><a href="#" target="_blank">Voir la preuve ↗</a></div>
-          </div>
+          <table class="comp-table">
+            <thead>
+              <tr><th>Bloc</th><th>Sous-compétences visées</th><th>Preuves associées</th></tr>
+            </thead>
+            <tbody>
+              <tr id="row-frscv-1">
+                <th scope="row"><span class="num">Bloc 1</span>Gérer le patrimoine informatique</th>
+                <td class="sub">
+                  <ul>
+                    <li>Exploiter des référentiels, normes et standards adoptés par le prestataire informatique.</li>
+                    <li>Vérifier les conditions de la continuité d'un service informatique.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Étude comparative WebGL vs WebGPU, analyse de l'obsolescence programmée de WebGL et évaluation de WebGPU comme standard de remplacement. Voyager et eCorpus mobilisés comme référentiels techniques existants. Identification des normes glTF 2.0 et WebGPU comme standards émergents du secteur.</p>
+                  <div class="links"><a href="https://app.notion.com/p/Ressources-3693f400ad5c80eaab79ff79ea533a78?source=copy_link" target="_blank">Ressources ↗</a>
+                  <a href="https://app.notion.com/p/WebGL-3693f400ad5c807c8089d4a012ea8c63?source=copy_link" target="_blank">Notes WebGL ↗</a>
+                  <a href="https://app.notion.com/p/WebGPU-3693f400ad5c80dcb8c8f3000105fbcc" target="_blank">Notes WebGPU ↗</a>
+                <a href="https://app.notion.com/p/eCorpus-36f3f400ad5c804584ecd5010ae47c09?source=copy_link" target="_blank">ECorpus ↗</a>
+              
+              </div>
+                </td>
+              </tr>
+              <tr id="row-frscv-2">
+                <th scope="row"><span class="num">Bloc 2</span>Répondre aux incidents et demandes</th>
+                <td class="sub">
+                  <ul>
+                    <li>Collecter, suivre et orienter des demandes.</li>
+                    <li>Traiter des demandes concernant les applications.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Demande initiale du tuteur : évaluer la faisabilité du remplacement de WebGL par WebGPU dans Voyager. Viewers WebGL et WebGPU fonctionnels produits en réponse. Tableaux comparatifs de métriques (FPS, frametime, draw calls, VRAM, coût CPU). Synthèse comparative finale transmise au tuteur. Journal de bord documentant le cycle complet de résolution.</p>
+                  <div class="links"><a href="https://app.notion.com/p/WebGL-VS-WebGPU-3693f400ad5c800e866bc62624f44645" target="_blank">Doc WebGL VS WebGPU ↗</a></div>
+                </td>
+              </tr>
+              <tr id="row-frscv-3">
+                <th scope="row"><span class="num">Bloc 3</span>Développer la présence en ligne</th>
+                <td class="sub">
+                  <ul>
+                    <li>Participer à l'évolution d'un site Web exploitant les données de l'organisation.</li>
+                    <li>Participer à la valorisation de l'image de l'organisation sur les médias numériques.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Contribution directe à l'évolution de Voyager, moteur de rendu WebGL de la plateforme eCorpus. Étude d'intégration de WebGPU dans l'écosystème eCorpus. Tests sur assets patrimoniaux réels hébergés par eCorpus. Présentation des résultats au réseau Continuum, réseau national de plus de 30 fédérations de recherche.</p>
+                  <div class="links"><a href="https://app.notion.com/p/Scanner-Artec-Leo-3753f400ad5c804688a2e9e20fc08dce" target="_blank">Scanner Artec Leo ↗</a><a href="https://app.notion.com/p/Captures-d-cran-3693f400ad5c80dcb9dbc7855ebe1a47" target="_blank">Captures d'écran ↗</a><a href="https://app.notion.com/p/WebGL-VS-WebGPU-3693f400ad5c800e866bc62624f44645" target="_blank">Doc WebGL VS WebGPU ↗</a></div>
+                </td>
+              </tr>
+              <tr id="row-frscv-4">
+                <th scope="row"><span class="num">Bloc 4</span>Travailler en mode projet</th>
+                <td class="sub">
+                  <ul>
+                    <li>Analyser les objectifs et les modalités d'organisation d'un projet.</li>
+                    <li>Planifier les activités.</li>
+                    <li>Évaluer les indicateurs de suivi d'un projet et analyser les écarts.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Journal de bord quotidien sur 6 semaines documentés. Tableau de suivi des tâches par journée avec statuts. Pages Notion structurées par thématique (viewers, comparatifs, extraits de code, scanner Artec Leo). Livrables fonctionnels conformes aux attentes du tuteur. Présentation nationale des résultats au réseau Continuum.</p>
+                  <div class="links"><a href="https://app.notion.com/p/Journal-de-bord-3693f400ad5c806facc9f17f6e793fb5" target="_blank">Journal de bord ↗</a>
+                  <a href="https://app.notion.com/p/Captures-d-cran-3693f400ad5c80dcb9dbc7855ebe1a47" target="_blank">Captures d'écran ↗</a>
+                  <a href="https://app.notion.com/p/Extraits-de-code-3693f400ad5c809fa5d4dff2a2a18d0a" target="_blank">Extraits de code ↗</a>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-frscv-6">
+                <th scope="row"><span class="num">Bloc 6</span>Organiser son développement professionnel</th>
+                <td class="sub">
+                  <ul>
+                    <li>Mettre en place son environnement d'apprentissage personnel.</li>
+                    <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
+                    <li>Gérer son identité professionnelle.</li>
+                    <li>Développer son projet professionnel.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Veille technologique active sur WebGPU, glTF 2.0, PBR, compute shaders et standards 3D web. Apprentissage autonome de WGSL, WebGL2, du pipeline de rendu 3D et d'un parseur GLB écrit depuis zéro. Prise en main du scanner Artec Leo et documentation de la procédure. Présentation nationale au réseau Continuum valorisant le profil professionnel. Environnement d'apprentissage structuré sur Notion (journal, synthèses, pages techniques).</p>
+                  <div class="links"><a href="https://app.notion.com/p/Stage-FR-SCV-WebGL-vs-WebGPU-3693f400ad5c80b4bc3bdaef0b8d7e7c" target="_blank">Voir la preuve ↗</a></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- PROJET 3 : VEILLE TECHNOLOGIQUE -->
         <div class="proj-panel" id="panel-veille">
           <div class="proj-meta">
             <div class="period">1ère année de BTS : veille technologique individuelle</div>
-            <div class="links"><a href="#" target="_blank">Voir la page Notion ↗</a></div>
+            <div class="links"><a href="https://app.notion.com/p/Veille-technologique-l-accessibilit-num-rique-RGAA-WCAG-3e3fe5e2613a80479739ee809d0b96da" target="_blank">Voir la page Notion ↗</a></div>
           </div>
 
-          <div class="comp-grid">
-            <div class="comp-card inactive"><div class="num">Bloc 1</div><div class="label">Gérer le patrimoine informatique</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 2</div><div class="label">Répondre aux incidents et demandes</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 3</div><div class="label">Développer la présence en ligne</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 4</div><div class="label">Travailler en mode projet</div></div>
-            <div class="comp-card inactive"><div class="num">Bloc 5</div><div class="label">Mettre à disposition un service informatique</div></div>
-            <div class="comp-card mobilisee" data-block="6" data-proj="veille"><div class="num">Bloc 6</div><div class="label">Organiser son développement professionnel</div></div>
-          </div>
-
-          <div class="comp-detail" data-detail="veille-6">
-            <h4>Sous-compétences visées</h4>
-            <ul>
-              <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
-              <li>Mettre en place son environnement d'apprentissage personnel.</li>
-            </ul>
-            <h4>Preuves associées</h4>
-            <p class="proof">Veille sur l'accessibilité numérique (RGAA / WCAG), choisie en écho à la demande initiale du projet L'étoile du jeu : un site pensé pour un public de personnes âgées. Trois sources croisées : le référentiel <a href="https://accessibilite.numerique.gouv.fr/" target="_blank">RGAA de la DINUM</a> (quatre principes POUR, critères techniques), les <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG du W3C</a> (norme internationale dont le RGAA est la déclinaison française), et une étude chiffrée sur l'accessibilité pour un public senior justifiant le choix du thème. Synthèse et argumentaire documentés sur une page Notion dédiée.</p>
-            <div class="links"><a href="https://app.notion.com/p/Veille-technologique-l-accessibilit-num-rique-RGAA-WCAG-3e3fe5e2613a80479739ee809d0b96da" target="_blank">Veille technologique ↗</a></div>
-          </div>
+          <table class="comp-table">
+            <thead>
+              <tr><th>Bloc</th><th>Sous-compétences visées</th><th>Preuves associées</th></tr>
+            </thead>
+            <tbody>
+              <tr id="row-veille-6">
+                <th scope="row"><span class="num">Bloc 6</span>Organiser son développement professionnel</th>
+                <td class="sub">
+                  <ul>
+                    <li>Mettre en œuvre des outils et stratégies de veille informationnelle.</li>
+                    <li>Mettre en place son environnement d'apprentissage personnel.</li>
+                  </ul>
+                </td>
+                <td>
+                  <p class="proof">Veille sur l'accessibilité numérique (RGAA / WCAG), choisie en écho à la demande initiale du projet L'étoile du jeu : un site pensé pour un public de personnes âgées. Trois sources croisées : le référentiel <a href="https://accessibilite.numerique.gouv.fr/" target="_blank">RGAA de la DINUM</a> (quatre principes POUR, critères techniques), les <a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG du W3C</a> (norme internationale dont le RGAA est la déclinaison française), et une étude chiffrée sur l'accessibilité pour un public senior justifiant le choix du thème. Synthèse et argumentaire documentés sur une page Notion dédiée.</p>
+                  <div class="links"><a href="https://app.notion.com/p/Veille-technologique-l-accessibilit-num-rique-RGAA-WCAG-3e3fe5e2613a80479739ee809d0b96da" target="_blank">Veille technologique ↗</a></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- PROJET 4 : 2E ANNEE -->
@@ -1065,8 +1253,8 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
           <div class="reco-card">
             <div class="reco-head">
               <a class="reco-avatar-link" href="https://github.com/jespertheend" target="_blank">
-  <img src="jesper.png" alt="Jesper van den Ende">
-</a>
+                <img src="jesper.png" alt="Jesper van den Ende">
+              </a>
               <div>
                 <div class="reco-name">Jesper van den Ende</div>
                 <div class="reco-role">Co-fondateur de <a href="https://pelicanparty.co/#home" target="_blank">Pelican Party Studios</a> · créateur de <a href="https://narrow.one/" target="_blank">Narrow One</a></div>
@@ -1082,8 +1270,8 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
           <div class="reco-card empty">
             <div class="reco-head">
               <a class="reco-avatar-link" href="https://pepr-iccare.fr/team-member/mohamed-ladrouz/" target="_blank">
-  <img src="mohamed_ladrouz.jpg" alt="Mohamed Ladrouz">
-</a>
+                <img src="mohamed_ladrouz.jpg" alt="Mohamed Ladrouz">
+              </a>
               <div>
                 <div class="reco-name">Mohamed Ladrouz</div>
                 <div class="reco-role">Ingénieur de Recherche &amp; responsable technique, FR SCV (FR CNRS 2052) : tuteur de stage</div>
@@ -1113,7 +1301,6 @@ footer{padding:32px; text-align:center; color:var(--text-dim); font-size:0.82rem
           <div class="contact-list">
             <div>E-mail<span>toshysna@proton.me</span></div>
             <div>Téléphone<span>06 32 51 85 30</span></div>
-            
           </div>
         </div>
       </div>
@@ -1145,34 +1332,28 @@ const setActive = () => {
 window.addEventListener('scroll', setActive);
 setActive();
 
-// project tabs
+// project tabs + matrice de synthèse
 const tabs = document.querySelectorAll('.proj-tab');
 const panels = document.querySelectorAll('.proj-panel');
+
+function showProject(id){
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.proj === id));
+  panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + id));
+}
+
 tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    panels.forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-' + tab.dataset.proj).classList.add('active');
-  });
+  tab.addEventListener('click', () => showProject(tab.dataset.proj));
 });
 
-// competency card accordion
-document.querySelectorAll('.comp-card.mobilisee').forEach(card => {
-  card.addEventListener('click', () => {
-    const key = card.dataset.proj + '-' + card.dataset.block;
-    const detail = document.querySelector('.comp-detail[data-detail="' + key + '"]');
-    const isOpen = detail.classList.contains('open');
-
-    // close all details/cards within this panel
-    const panel = card.closest('.proj-panel');
-    panel.querySelectorAll('.comp-detail').forEach(d => d.classList.remove('open'));
-    panel.querySelectorAll('.comp-card').forEach(c => c.classList.remove('open'));
-
-    if (!isOpen) {
-      detail.classList.add('open');
-      card.classList.add('open');
-    }
+document.querySelectorAll('.matrix .dot-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    showProject(btn.dataset.proj);
+    const row = document.getElementById('row-' + btn.dataset.proj + '-' + btn.dataset.block);
+    if (!row) return;
+    row.scrollIntoView({behavior:'smooth', block:'center'});
+    row.classList.remove('flash');
+    void row.offsetWidth; // relance l'animation
+    row.classList.add('flash');
   });
 });
 </script>
